@@ -1,43 +1,23 @@
-const userModel = require('../models/user');
-
-exports.createUser = async (req,res) => {
-	const user = new userModel(req.body);
-    try {
-        await user.save();
-        res.status(200).send('Usuario creado con éxito');
-    } catch(err) {
-        res.status(500).send(err);
-    }
-}
-
-exports.readUser = async (req,res) => {
-	const user = userModel.find({ numEmpl: req.params.numEmpl });
-    if (!user) return res.status(404).send('No existe el usuario');
-	
-	try {
-        res.status(200).send(user);
-    } catch(err) {
-        res.status(500).send(err);
-    }
-}
+const User = require('../models/user');
 
 exports.updateUser = async (req, res) => {
+	const { id, name, password } = req.body
 	try {
-		const user = await userModel.findByIdAndUpdate(req.params.numEmpl, req.body);
-		await userModel.save();
-		response.status(200).send(user);
+		const user = await User.findByIdAndUpdate(id,{ name, password });
+		res.status(200).send('Done!');
 	} catch(err) {
-		res.status(500).send(err);
+		console.log(err);
+		res.status(500).send(err.message);
 	}
 }
 
 exports.deleteUser = async (req,res) => {
 	try {
-		const user = await userModel.findByIdAndDelete(req.params.numEmpl);
+		const user = await User.findByIdAndDelete(req.params.numEmpl);
 
 		if (!user) res.status(404).send('No user');
 		res.status(200).send('Success!');
 	} catch(err) {
-		res.status(500).send(err);
+		res.status(500).send(err.message);
 	}
 }

@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const LogSchema = new mongoose.Schema({
     date: Date,
     service: {
-    type: String,
-    enum: ['OS','ID','OT','CU','Soporte']
+        type: String,
+        enum: ['','OS','ID','OT','CU','Soporte']
     },
     id: String,
     type: {
         type: String,
-        enum: ['Organica','Masiva','ZTE', 'NA']
+        enum: ['','Organica','Masiva','ZTE', 'NA']
     },
     numEmpl: String,
     idc: String,
@@ -25,18 +25,19 @@ const LogSchema = new mongoose.Schema({
         p: Number,
         bw: Number,
         clients: Number,
+        portNumber: Number,
         alarms: [{
             alarm: String,
             status: {
                 type: String,
-                enum: ['Alarmada', 'Apagada']
+                enum: ['','Alarmada', 'Apagada']
             }
         }],
         ports: [{
             port: String,
             status: {
                 type: String,
-                enum: ['Libre','Ocupado','Depurado','Asegurado','Fusionado', 'Empalmado', 'SinPigtail','Danado','Atenuado']
+                enum: ['','Libre','Ocupado','Depurado','Asegurado','Fusionado', 'Empalmado', 'SinPigtail','Danado','Atenuado']
             }
         }]
     }],
