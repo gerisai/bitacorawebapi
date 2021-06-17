@@ -17,8 +17,6 @@ exports.updateLog = async (req,res) => {
     try {
         const user = await User.findOne({ numEmpl });
         let oldLog = await user.logs.id(id);
-        console.log(oldLog);
-        console.log(log);
         oldLog.set({...log});
         await user.save()
         res.status(200).send('Depuración editada con éxito');
