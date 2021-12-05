@@ -7,11 +7,10 @@
 const app = require('../app');
 const debug = require('debug')('api:server');
 const http = require('http');
-require('dotenv').config()
 
 //Set up MongoDB
 const mongoose = require('mongoose');
-const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@laufey.midoe.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+const uri = `${process.env.DB_STRING}`;
 
 /**
  * Get port from environment and store in Express.
